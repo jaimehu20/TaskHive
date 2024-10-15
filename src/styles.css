@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    font-family: 'Nunito';
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+}
+
+main {
+    height: 100%;
+    overflow: hidden;
+}
