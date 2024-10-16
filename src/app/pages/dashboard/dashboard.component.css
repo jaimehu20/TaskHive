@@ -1,0 +1,44 @@
+.today-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.today-bar svg {
+    cursor: pointer;
+}
+
+.nearest-task {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+}
+
+.nearest-task img {
+    width: 20%;
+    border-radius: 8px;
+}
+
+.nearest-task div {
+    background: rgb(29, 29, 31);
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    flex: 1;
+}
+
+.nearest-task p {
+    margin-right: 30px;
+}
+
+.nearest-task p:nth-child(1) {
+    margin-bottom: 0;
+}
+
+.nearest-task p:nth-child(2) {
+    margin-top: 0;
+}

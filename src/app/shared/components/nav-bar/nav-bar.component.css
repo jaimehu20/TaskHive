@@ -1,7 +1,6 @@
 nav {
-    background: #FEF4F4;
     color: black;
-    padding: 8px;
+    padding: 4px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,7 +15,8 @@ h1 {
     border: none;
     display: flex;
     flex-direction: column;
-    background: transparent; }
+    background: transparent;
+    cursor: pointer; }
   .line {
     fill: none;
     stroke: black;
@@ -43,3 +43,20 @@ h1 {
     stroke-dasharray: 90 207;
     stroke-dashoffset: -134;
     stroke-width: 6; }
+
+div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 20px;
+}
+
+div img {
+  width: 40px;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+div svg {
+  cursor: pointer;
+}
