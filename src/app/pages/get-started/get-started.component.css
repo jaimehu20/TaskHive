@@ -5,7 +5,7 @@
     height: 100vh;
 }
   
-.welcome-page, .login-page, .register-page {
+.welcome, .login, .register {
     min-width: 100%;
     display: flex;
     flex-direction: column;
@@ -14,7 +14,7 @@
     overflow-y: auto;
 }
 
-.welcome-page, .login-page {
+.welcome, .login {
     justify-content: center;
 }
   
@@ -91,4 +91,5 @@ form button {
 
 .register-link a {
     text-decoration: none;
+    cursor: pointer;
 }
