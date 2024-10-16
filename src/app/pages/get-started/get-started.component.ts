@@ -9,10 +9,21 @@ import { CommonModule } from '@angular/common';
   styleUrl: './get-started.component.css'
 })
 export class GetStartedComponent {
-  slide() {
+  slideToLogin() {
     const container = document.querySelector('.container');
     if (container) {
+      container.classList.remove('slide-furthest');
       container.classList.add('slide-left');
+    } else {
+      console.error('Container not found');
+    }
+  }
+
+  slideToRegister() {
+    const container = document.querySelector('.container');
+    if (container) {
+      container.classList.remove('slide-left');
+      container.classList.add('slide-furthest');
     } else {
       console.error('Container not found');
     }

@@ -3,22 +3,44 @@
     <img src="logo.png"/>
     <h1>Task Hive</h1>
     <span>Stay organized with simplicity</span>
-    <button (click)="slide()">Get Started</button>
+    <button (click)="slideToLogin()">Get Started</button>
   </div>
   <div  class="login-page">
-  <img src="signup.png"/>
-  <h1>Login</h1>
-    <form>
-      <label for="username">Username *</label>
-      <input id="username" type="text" placeholder="Enter your email address" />
-      <label for="password">Password *</label>
-      <input id="password" type="password" placeholder="Enter your password" />
-      <button type="submit">Login</button>
-    </form>
-    <div class="register-link">
-      <p>New to Task Hive?</p>
-      <a href="https://github.com/jaimehu20">Sign Up</a>
-    </div>
+      <img src="signup.png"/>
+      <h1>Login</h1>
+      <form>
+        <label for="username">Username *</label>
+        <input id="username" type="text" placeholder="Enter your email address" />
+        <label for="password">Password *</label>
+        <input id="password" type="password" placeholder="Enter your password" />
+        <button type="submit">Login</button>
+      </form>
+      <div class="register-link">
+        <p>New to Task Hive?</p>
+        <a (click)="slideToRegister()">Sign Up</a>
+      </div>
+  </div>
+  <div class="register-page">
+      <img src="signup.png"/>
+      <h1>Register</h1>
+      <form>
+        <label for="firstname">First name *</label>
+        <input id="firstname" type="text" placeholder="Enter your first name" />
+        <label for="lastname">Last name *</label>
+        <input id="lastname" type="text" placeholder="Enter your last name" />
+        <label for="birthdate">Birth date *</label>
+        <input id="birthdate" type="date" placeholder="Enter your birthdate" />
+        <label for="email">Email *</label>
+        <input id="email" type="email" placeholder="Enter your email" />
+        <label for="password">Password *</label>
+        <input id="password" type="password" placeholder="Choose your password" />
+        <label for="passwordconf">Confirm your password *</label>
+        <input id="passwordconf" type="password" placeholder="Confirm your password" />
+        <button type="submit">Register</button>
+      </form>
+      <div class="register-link">
+        <p>Already registered?</p>
+        <a (click)="slideToLogin()">Login</a>
+      </div>
   </div>
 </section>
-

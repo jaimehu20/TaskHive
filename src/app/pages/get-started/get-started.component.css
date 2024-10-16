@@ -5,15 +5,25 @@
     height: 100vh;
 }
   
-.welcome-page, .login-page {
+.welcome-page, .login-page, .register-page {
     min-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.welcome-page, .login-page {
+    justify-content: center;
 }
   
 .slide-left {
     transform: translateX(-100%);
+}
+
+.slide-furthest {
+    transform: translateX(-200%)
 }
 
 img {
@@ -82,4 +92,3 @@ form button {
 .register-link a {
     text-decoration: none;
 }
-
