@@ -19,6 +19,7 @@
 .nearest-task img {
     width: 20%;
     border-radius: 8px;
+    object-fit: cover;
 }
 
 .nearest-task div {
@@ -41,4 +42,78 @@
 
 .nearest-task p:nth-child(2) {
     margin-top: 0;
+}
+
+.task-container {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    border-bottom: 2px solid rgb(211, 211, 211);
+    padding-bottom: 20px;
+}
+
+.task-container img {
+    width: 30px;
+    height: 30px;
+    border-radius: 14px;
+    align-self: center;
+}
+
+.tasks-per-day h2 {
+    background: rgb(29, 29, 31);
+    border-radius: 100px;
+    color: rgb(255, 255, 255);
+    padding: 20px;
+    width: 60px;
+    font-weight: 400;
+    text-align: center;
+    height: 60px;
+}
+
+.task-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.task-info div {
+    display: flex;
+}
+
+.task-description {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-left: 24px;
+    flex: 1;
+}
+
+.task-description p:nth-child(1) {
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+.task-description p:nth-child(2) {
+    font-size: 35px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.task-tags {
+    display: flex;
+    gap: 10px;
+}
+
+.tag {
+    background: rgb(0, 102, 204);
+    color: rgb(255, 255, 255);
+    border-radius: 100px;
+    padding: 5px 16px;
+    display: flex;
+    align-items: center;
+}
+
+.tag p {
+    margin-top: 0;
+    font-size: 14px !important; 
 }
