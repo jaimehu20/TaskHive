@@ -1,0 +1,15 @@
+<div  class="login">
+    <img src="signup.png"/>
+    <h1>Login</h1>
+    <form (submit)="login(username.value, password.value, $event)">
+      <label for="username">Username *</label>
+      <input id="username" #username type="text" placeholder="Enter your email address" />
+      <label for="password">Password *</label>
+      <input id="password" #password type="password" placeholder="Enter your password" />
+      <button type="submit">Login</button>
+    </form>
+    <div class="register-link">
+      <p>New to Task Hive?</p>
+      <a (click)="slideToRegister()">Sign Up</a>
+    </div>
+</div>

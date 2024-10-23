@@ -1,0 +1,27 @@
+<div class="register">
+    <img src="signup.png"/>
+    <h1>Register</h1>
+    <form [formGroup]="registerForm" (ngSubmit)="register($event)">
+      <label for="name">First name *</label>
+      <input id="name" formControlName="name" type="text" placeholder="Enter your first name" />
+      <label for="lastname">Last name *</label>
+      <input id="lastname" formControlName="lastname" type="text" placeholder="Enter your last name" required/>
+      <label for="birthdate">Birth date *</label>
+      <input id="birthdate" formControlName="birthdate" type="date" placeholder="Enter your birthdate" required/>
+      <label for="email">Email *</label>
+      <input id="email" formControlName="email" type="email" placeholder="Enter your email" required/>
+      <label for="password">Password *</label>
+      <input id="password" formControlName="password" type="password" placeholder="Choose your password" required/>
+      <label for="passwordconf">Confirm your password *</label>
+      <input id="passwordconf" formControlName="passwordconf" type="password" placeholder="Confirm your password" required/>
+      <div *ngIf="passwordsDoNotMatch() && registerForm.dirty">
+        <span style="color: red">Passwords do not match</span>
+      </div>
+      <button type="submit" [disabled]="registerForm.invalid">Register</button>
+      <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div> 
+    </form>
+    <div class="register-link">
+      <p>Already registered?</p>
+      <a (click)="slideToLogin()">Login</a>
+    </div>
+</div>
