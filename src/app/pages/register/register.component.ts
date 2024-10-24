@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit {
           this.errorMessage = err.message
         },
         complete: () => {
-          console.log('Registration succeed.')
+          this.router.navigate(['/first-steps'])
         }
       })
     }
