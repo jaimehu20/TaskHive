@@ -9,14 +9,15 @@
 
 .container {
     display: flex;
-    align-items: center;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     transition: transform 0.5s ease-in-out;
     height: 100vh;
 }
 
 img {
-    width: 70%;
+    width: 50%;
     max-width: 264px;
 }
 
@@ -37,3 +38,36 @@ form {
     flex-direction: column;
 }
 
+select {    
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border: none;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    margin-bottom: 30px;
+    padding: 10px;
+    font-family: 'Nunito';
+}
+    
+button {
+    color: #FFFFFF;
+    outline: none;
+    cursor: pointer;
+    width: 182px;
+    height: 56px;
+    background-color: rgb(0, 102, 204);
+    border-radius: 5px;
+    border: 0px;
+    font-family: 'Nunito';
+    font-size: 18px;
+    align-self: center;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+    margin-bottom: 20px;
+  }
+  

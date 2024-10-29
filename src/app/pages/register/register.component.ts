@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { RegisterService } from '../../services/register/register.service';
 import { passwordMatchValidator } from '../../validators/password-match.validator';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   errorMessage: string | null = null;
 
-  constructor(private fb: FormBuilder, private registerService: RegisterService, private router: Router) {
+  constructor(private fb: FormBuilder, private registerService: RegisterService, private router: Router, private authService: AuthService) {
     this.registerForm = this.fb.group({});
   }
 
@@ -55,17 +56,41 @@ export class RegisterComponent implements OnInit {
       this.registerService.register(userData).subscribe({
         next: response => {
           if(response) {
-            console.log('User registered successfully',  response)
+            this.autoLogin(userData.email, userData.password, event)
           }
         },
         error: err => {
           this.errorMessage = err.message
         },
         complete: () => {
-          this.router.navigate(['/first-steps'])
+          return
         }
       })
     }
+  }
+
+  autoLogin(username: string, password: string, event: Event) {
+    event.preventDefault();
+    
+    this.authService.login(username, password).subscribe({
+      next: response => {
+          if (response && localStorage.getItem('userID')) {
+            const userId = localStorage.getItem('userID');
+            if (userId) {
+              this.router.navigate([`/first-steps/${userId}`]);
+            }
+          } else {
+            alert('Login failed');
+          }
+      },
+      error: err => {
+        console.error(`Login error:` , err);
+        alert('Login failed. Please check your credentials and try again.')
+      },
+      complete: () => {
+        return
+      }
+    });
   }
 
   passwordsDoNotMatch(): boolean {

@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
           console.error(`Error fetching data:`, error)
         },
         complete: () => {
-          console.log(`Data fetching complete`);
+          return
         }
       })
     }  

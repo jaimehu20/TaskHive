@@ -42,7 +42,7 @@ export class LoginComponent {
         alert('Login failed. Please check your credentials and try again.')
       },
       complete: () => {
-        console.log('Login completed.')
+        return
       }
     });
   }

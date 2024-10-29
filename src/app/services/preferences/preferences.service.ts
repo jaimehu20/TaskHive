@@ -5,20 +5,17 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class PreferencesService {
 
-  private apiUrl = 'http://localhost:3000/users' // 'https://kfh1182ty0.execute-api.eu-west-3.amazonaws.com/dev/users';
+  private apiUrl = 'http://localhost:3000/first-steps' // 'https://kfh1182ty0.execute-api.eu-west-3.amazonaws.com/dev/users';
 
   constructor(private http: HttpClient) { }
 
-  getUserInfo(userID: string): Observable<any> {
+  updatePreferences(userID: string, preferences: any): Observable<any> {
     const url = `${this.apiUrl}/${userID}`
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${localStorage.getItem('authTOKEN')}`
     });
-
-    return this.http.get<any>(url, { headers });
+    return this.http.patch<any>(url, preferences, { headers })
   }
-
-  
 }

@@ -16,7 +16,7 @@ export class RegisterService {
     return this.http.post<any>(this.apiUrl, userData,  { headers }).pipe(
       tap(response => {
         if (response) {
-          console.log('Succesful registration:', response)
+          return
         }
       }),
       catchError(error => {

@@ -7,7 +7,7 @@ import { FirstStepsComponent } from './pages/first-steps/first-steps.component';
 
 export const routes: Routes = [
     { path: 'get-started', component: GetStartedComponent },
-    { path: 'first-steps', component: FirstStepsComponent },
+    { path: 'first-steps/:id', component: FirstStepsComponent, canActivate: [authGuard] },
     { path: 'dashboard/:id', component: DashboardComponent, canActivate: [authGuard] },
     { path: '', redirectTo: '/get-started', pathMatch: 'full' }
 ];

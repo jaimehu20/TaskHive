@@ -4,15 +4,11 @@
     <p>Please fill out this short form to help us better understand your preferences.</p>
     <h2>{{ questions[currentQuestionIndex].question }}</h2>
     <form [formGroup]="form" (ngSubmit)="onNext()">
-        <ng-container *ngIf="questions[currentQuestionIndex]?.type === 'input'">
-          <input id="answer" formControlName="answer" placeholder="Escribe tu respuesta aquí" />
-        </ng-container>
-        <ng-container *ngIf="questions[currentQuestionIndex]?.type === 'select'">
           <select id="answer" formControlName="answer">
-            <option value="" disabled selected>Selecciona una opción</option>
+            <option value="" disabled selected>Select an option</option>
             <option *ngFor="let option of questions[currentQuestionIndex]?.options" [value]="option">{{ option }}</option>
           </select>
-        </ng-container>  
-        <button type="submit">Next</button>
+        <span *ngIf="showError" class="error-message">Please select an option to proceed</span>    
+        <button type="submit">{{ isLastQuestion() ? 'Submit' : 'Next' }}</button>
     </form> 
 </div>
