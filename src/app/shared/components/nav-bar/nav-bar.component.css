@@ -3,7 +3,7 @@ nav {
     padding: 4px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
 }
 
 h1 {
@@ -47,8 +47,8 @@ h1 {
 div {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
-  margin-right: 20px;
 }
 
 div img {
@@ -59,4 +59,56 @@ div img {
 
 div svg {
   cursor: pointer;
+}
+
+.main-menu {
+  min-height: 100vh;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  margin-top: 50px;
+  display: none;
+  transition: all 0.3s ease;
+}
+
+.main-menu.show {
+  display: block;
+}
+
+.main-menu ul {
+  font-size: 30px;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.main-menu li {
+  cursor: pointer;
+}
+
+.profile-menu {
+  display: none;
+  background: gray;
+  width: 30%;
+  text-align: left;
+  align-self: end;
+  border-radius: 8px;
+  color: #FFF;
+}
+
+.profile-menu.show {
+  display: block;
+}
+
+.profile-menu ul {
+  font-size: 20px;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 8px;
+  padding-left: 10px;
 }

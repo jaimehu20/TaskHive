@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
+  private userInfo: any
 
   private apiUrl = 'http://localhost:3000/users' // 'https://kfh1182ty0.execute-api.eu-west-3.amazonaws.com/dev/users';
 
@@ -20,5 +21,12 @@ export class UserService {
     return this.http.get<any>(url, { headers });
   }
 
-  
+  setUserInfo(info: any) {
+    this.userInfo = info
+  }
+
+  getInfo() {
+    return this.userInfo
+  }
+
 }

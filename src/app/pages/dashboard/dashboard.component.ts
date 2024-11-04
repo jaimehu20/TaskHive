@@ -32,6 +32,7 @@ export class DashboardComponent implements OnInit {
           console.error(`Error fetching data:`, error)
         },
         complete: () => {
+          this.userService.setUserInfo(this.userData)
           return
         }
       })

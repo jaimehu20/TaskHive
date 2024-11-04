@@ -1,0 +1,63 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.profile-pic {
+    display: flex;
+    flex-direction: column;
+    height: 230px;
+}
+
+.profile-pic img {
+    width: 250px;
+}
+
+.profile-pic svg {
+    background: white;
+    border: 1px solid black;
+    border-radius: 21px;
+    padding: 5px;
+    align-self: end;
+    position: relative;
+    bottom: 210px;
+    right: 32px;
+    overflow: visible;
+    cursor: pointer;
+}
+
+h1 {
+    margin-bottom: 0;
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: 300;
+    text-decoration: underline;
+}
+
+h3 {
+    font-size: 25px;
+}
+
+.personal-info {
+    width: 80%;
+    margin-bottom: 50px;
+}
+
+span {
+    background: #CEE0F2;
+    padding: 16px;
+    width: 90%;
+    display: block;
+    color: #030303;
+    font-weight: 500;
+}
+
+.preferences-info {
+    width: 80%;
+    margin-bottom: 30px;
+}
