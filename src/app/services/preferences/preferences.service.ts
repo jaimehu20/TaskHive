@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class PreferencesService {
 
-  private apiUrl = 'http://localhost:3000/first-steps' // 'https://kfh1182ty0.execute-api.eu-west-3.amazonaws.com/dev/users';
+  private apiUrl = 'https://rnstmz00d9.execute-api.eu-west-3.amazonaws.com/dev/first-steps'; // 'http://localhost:3000/first-steps'
 
   constructor(private http: HttpClient) { }
 
