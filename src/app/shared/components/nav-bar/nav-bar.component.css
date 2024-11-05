@@ -112,3 +112,7 @@ div svg {
   border-radius: 8px;
   padding-left: 10px;
 }
+
+.profile-menu li {
+  cursor: pointer;
+}

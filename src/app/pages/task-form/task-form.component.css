@@ -1,0 +1,158 @@
+header {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+main {
+    width: 90%;
+    margin: 0 auto;
+}
+
+form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-size: 20px;
+}
+
+input {
+    background-color: rgb(250, 250, 252);
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px;
+    border: 0px solid rgb(229, 231, 235);
+    padding: 15px;
+    width: 90%;
+    margin-bottom: 30px;
+    font-family: 'Nunito';
+}
+
+textarea {
+    background-color: rgb(250, 250, 252);
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px;
+    border: 0px solid rgb(229, 231, 235);
+    padding: 15px;
+    width: 90%;
+    margin-bottom: 30px;
+    font-family: 'Nunito';
+}
+
+.priority-selector {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding-top: 10px;
+    margin-bottom: 30px;
+}
+
+.priority-selector button:nth-child(1) {
+    background-color: #cdf8d8;
+    color: #5ad07a;
+    font-weight: 700;
+    border-radius: 18px;
+    border: none;
+    padding: 10px;
+    font-family: 'Nunito';
+    width: 100px;
+    cursor: pointer;
+}
+
+.priority-selector button:nth-child(2) {
+    color: #ffa800;
+    background-color: #f6dba0;
+    font-weight: 700;
+    border-radius: 18px;
+    border: none;
+    padding: 10px;
+    font-family: 'Nunito';
+    width: 100px;
+    cursor: pointer;
+}
+
+.priority-selector button:nth-child(3){
+    color: #e23428;
+    background-color: #f4bebb;
+    font-weight: 700;
+    border-radius: 18px;
+    border: none;
+    padding: 10px;
+    font-family: 'Nunito';
+    width: 100px;
+    cursor: pointer;
+}
+
+.priority-selector button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.tag-input {
+    display: flex;
+}
+
+.tag-input input {
+    margin-bottom: 0;
+}
+
+.tag-input svg {
+    align-self: center;
+    position: absolute;
+    right: 50px;
+    cursor: pointer;
+}
+
+.tag-list {
+    display: flex;
+    margin-top: 20px;
+    gap: 30px;
+    justify-content: center;
+}
+
+.tag {
+    background: rgb(0, 102, 204);
+    color: rgb(255, 255, 255);
+    border-radius: 100px;
+    padding: 5px 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.error-message {
+    color: red;
+    margin: 0 auto;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.send-button {
+    color: #FFFFFF;
+    outline: none;
+    cursor: pointer;
+    width: 182px;
+    height: 56px;
+    background-color: rgb(0, 102, 204);
+    border-radius: 5px;
+    border: 0px;
+    font-family: "Nunito";
+    font-size: 18px;
+    align-self: center;
+}
+
+.time-selector {
+    display: flex;
+}
+
+.time-selector input {
+    width: 150px;
+}
+
+.time-selector label {
+    margin-bottom: 50px;
+}

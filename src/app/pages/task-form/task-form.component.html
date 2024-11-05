@@ -1,0 +1,62 @@
+<app-nav-bar />
+<header>
+    <h1>Create Task</h1>
+</header>
+<main>
+    <form [formGroup]="taskForm" (ngSubmit)="submit($event)">
+        <label for="task-name">Task name</label>
+        <input id="task-name" formControlName="taskName" type="text" placeholder="Enter task name..."/>
+        <label for="task-description">Task description</label>
+        <textarea id="task-description" formControlName="taskDescription" rows="5" cols="40" maxlength="200" placeholder="Enter your task description... (200 max-length)"></textarea>
+        <label for="deadline">Dead line</label>
+        <input id="deadline" formControlName="deadLine" type="date"/>
+        <div class="time-selector">
+            <div>
+                <label for="startTime">Start time</label>
+                <input formControlName="startTime" type="time"/>
+            </div>
+            <div>
+                <label for="endTime">End time</label>
+                <input formControlName="endTime" type="time"/>
+            </div>            
+        </div>
+        <div *ngIf="taskForm.errors?.['timeError'] && taskForm.touched" class="error-message">
+            Start time must be earlier than the end time.
+        </div>
+        <label>Priority</label>
+        <div class="priority-selector">
+            <button [ngClass]="{'active': priority === 'low'}" (click)="setPriority('low')" type="button">Low</button>
+            <button [ngClass]="{'active': priority === 'medium'}" (click)="setPriority('medium')" type="button">Medium</button>
+            <button [ngClass]="{'active': priority === 'high'}" (click)="setPriority('high')" type="button">High</button>
+        </div>
+        <label>Tags</label>
+        <div class="tags-container">
+            <div class="tag-input">
+                <input type="text" [(ngModel)]="tagInput" [ngModelOptions]="{standalone: true}" placeholder="Enter your tags... (max 3 tags)" (keyup.enter)="addTag()"/>
+                <svg (click)="addTag()"
+                    xmlns="http://www.w3.org/2000/svg"  
+                    width="24"  
+                    height="24"  
+                    viewBox="0 0 24 24"  
+                    fill="none"  
+                    stroke="#ADA1A0"  
+                    stroke-width="2"  
+                    stroke-linecap="round"  
+                    stroke-linejoin="round"  
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" />
+                    <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                    <path d="M14 4l0 4l-6 0l0 -4" />
+                </svg>
+            </div>
+            <div class="tag-list">
+                <span class="tag" *ngFor="let tag of tags; let i = index" (click)="removeTag(i)">{{ tag }}</span>
+            </div>
+            <div class="error-message">
+                <span *ngIf="tags.length === 3">You have reached the maximum number of tags</span>
+            </div>
+        </div>
+        <button type="submit" [disabled]="taskForm.invalid" class="send-button">Add task</button>
+    </form>
+</main>

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class UserService {
   private userInfo: any
 
-  private apiUrl = 'https://rnstmz00d9.execute-api.eu-west-3.amazonaws.com/dev/users'; //'http://localhost:3000/users';
+  private apiUrl = 'http://localhost:3000/users';  // 'https://rnstmz00d9.execute-api.eu-west-3.amazonaws.com/dev/users'
 
   constructor(private http: HttpClient) { }
 

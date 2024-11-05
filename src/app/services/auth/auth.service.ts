@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private apiUrl =  'https://rnstmz00d9.execute-api.eu-west-3.amazonaws.com/dev/login' // 'https://kfh1182ty0.execute-api.eu-west-3.amazonaws.com/dev/login';
+  private apiUrl = 'http://localhost:3000/login';  // 'https://rnstmz00d9.execute-api.eu-west-3.amazonaws.com/dev/login';
 
   constructor(private http: HttpClient, private router: Router) { }
 
