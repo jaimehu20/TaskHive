@@ -1,6 +1,8 @@
 <app-nav-bar />
-<main>
+<header>
     <h1 class="welcome-message">Welcome, {{userData.name}}</h1>
+</header>
+<main>
     <div class="today-bar">
         <h2>Today's schedule</h2>
         <svg (click)="taskCreatorRedirect()" viewBox="0 0 512 512" style="width: 32px; height: 32px; overflow: visible; opacity: 1; z-index: 1; fill: rgb(29, 29, 31);">
@@ -17,33 +19,15 @@
     </section>
     <section class="tasks-per-day">
         <div class="task-container">
-            <h2>18<br>DEC</h2>
+            <h2>{{ todaysTasks[0].deadLine | date: 'd' }}<br>{{ todaysTasks[0].deadLine | date: 'MMM' | uppercase }}</h2>
             <div class="task-info">
-                <div>
-                    <div class="task-description">
-                        <p>1:00 - 2:00PM</p>
-                        <p>Exercise</p>
+                <div *ngIf="todaysTasks.length > 0">
+                    <div *ngFor="let task of todaysTasks" class="task-description">
+                        <p>{{task.startTime}} - {{task.endTime}}</p>
+                        <p>{{task.taskName}}</p>
                         <div class="task-tags">
-                            <div class="tag">
-                                <p>Personal</p>
-                            </div>
-                            <div class="tag">
-                                <p>Stay fit</p>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="defaultprofile.webp"/>
-                </div>
-                <div>
-                    <div class="task-description">
-                        <p>1:00 - 2:00PM</p>
-                        <p>Exercise</p>
-                        <div class="task-tags">
-                            <div class="tag">
-                                <p>Personal</p>
-                            </div>
-                            <div class="tag">
-                                <p>Stay fit</p>
+                            <div *ngFor="let tag of task.tags" class="tag">
+                                <p>{{tag}}</p>
                             </div>
                         </div>
                     </div>
@@ -51,108 +35,25 @@
                 </div>
             </div>
         </div>
-        <div class="task-container">
-            <h2>18<br>DEC</h2>
-            <div class="task-info">
-                <div>
-                    <div class="task-description">
-                        <p>1:00 - 2:00PM</p>
-                        <p>Exercise</p>
-                        <div class="task-tags">
-                            <div class="tag">
-                                <p>Personal</p>
-                            </div>
-                            <div class="tag">
-                                <p>Stay fit</p>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="defaultprofile.webp"/>
-                </div>
-                <div>
-                    <div class="task-description">
-                        <p>1:00 - 2:00PM</p>
-                        <p>Exercise</p>
-                        <div class="task-tags">
-                            <div class="tag">
-                                <p>Personal</p>
-                            </div>
-                            <div class="tag">
-                                <p>Stay fit</p>
+    </section>
+    <section class="nearby-tasks">
+        <h1>Nearby tasks</h1>
+        <div *ngFor="let date of groupedKeys">
+            <div *ngFor="let task of groupedTasks[date]" class="task-container">
+                <h2>{{ date | date:'d' }}</h2>
+                <div class="task-info">
+                    <div *ngIf="nearbyTasks.length > 0">
+                        <div class="task-description">
+                            <p>{{task.startTime}} - {{task.endTime}}</p>
+                            <p>{{task.taskName}}</p>
+                            <div class="task-tags">
+                                <div *ngFor="let tag of task.tags" class="tag">
+                                    <p>{{tag}}</p>
+                                </div>
                             </div>
                         </div>
+                        <img src="defaultprofile.webp"/>
                     </div>
-                    <img src="defaultprofile.webp"/>
-                </div>
-            </div>
-        </div>
-        <div class="task-container">
-            <h2>18<br>DEC</h2>
-            <div class="task-info">
-                <div>
-                    <div class="task-description">
-                        <p>1:00 - 2:00PM</p>
-                        <p>Exercise</p>
-                        <div class="task-tags">
-                            <div class="tag">
-                                <p>Personal</p>
-                            </div>
-                            <div class="tag">
-                                <p>Stay fit</p>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="defaultprofile.webp"/>
-                </div>
-                <div>
-                    <div class="task-description">
-                        <p>1:00 - 2:00PM</p>
-                        <p>Exercise</p>
-                        <div class="task-tags">
-                            <div class="tag">
-                                <p>Personal</p>
-                            </div>
-                            <div class="tag">
-                                <p>Stay fit</p>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="defaultprofile.webp"/>
-                </div>
-            </div>
-        </div>
-        <div class="task-container">
-            <h2>18<br>DEC</h2>
-            <div class="task-info">
-                <div>
-                    <div class="task-description">
-                        <p>1:00 - 2:00PM</p>
-                        <p>Exercise</p>
-                        <div class="task-tags">
-                            <div class="tag">
-                                <p>Personal</p>
-                            </div>
-                            <div class="tag">
-                                <p>Stay fit</p>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="defaultprofile.webp"/>
-                </div>
-                <div>
-                    <div class="task-description">
-                        <p>1:00 - 2:00PM</p>
-                        <p>Exercise</p>
-                        <div class="task-tags">
-                            <div class="tag">
-                                <p>Personal</p>
-                            </div>
-                            <div class="tag">
-                                <p>Stay fit</p>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="defaultprofile.webp"/>
                 </div>
             </div>
         </div>

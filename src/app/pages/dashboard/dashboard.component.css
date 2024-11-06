@@ -62,6 +62,7 @@
     display: flex;
     border-bottom: 2px solid rgb(211, 211, 211);
     padding-bottom: 20px;
+    cursor: pointer;
 }
 
 .task-container img {
@@ -128,4 +129,26 @@
 .tag p {
     margin-top: 0;
     font-size: 14px !important; 
+}
+
+.nearby-tasks {
+    margin-top: 50px;
+}
+
+.nearby-tasks h1 {
+    width: 90%;
+    margin: 0 auto;
+    font-size: 30px;
+}
+
+.nearby-tasks h2 {
+    background: #CEE0F2;
+    height: 30px;
+    border-radius: 44px;
+    padding: 14px;
+    width: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    font-weight: 400;
+    text-align: center;
 }
