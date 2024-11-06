@@ -21,7 +21,7 @@
         <div class="task-container">
             <h2>{{ todaysTasks[0].deadLine | date: 'd' }}<br>{{ todaysTasks[0].deadLine | date: 'MMM' | uppercase }}</h2>
             <div class="task-info">
-                <div *ngIf="todaysTasks.length > 0">
+                <div class="taskbox" *ngIf="todaysTasks.length > 0">
                     <div *ngFor="let task of todaysTasks" class="task-description">
                         <p>{{task.startTime}} - {{task.endTime}}</p>
                         <p>{{task.taskName}}</p>
@@ -42,10 +42,10 @@
             <div *ngFor="let task of groupedTasks[date]" class="task-container">
                 <h2>{{ date | date:'d' }}</h2>
                 <div class="task-info">
-                    <div *ngIf="nearbyTasks.length > 0">
+                    <div *ngIf="nearbyTasks.length > 0" >
                         <div class="task-description">
                             <p>{{task.startTime}} - {{task.endTime}}</p>
-                            <p>{{task.taskName}}</p>
+                            <p class="nearby-taskName">{{task.taskName}}</p>
                             <div class="task-tags">
                                 <div *ngFor="let tag of task.tags" class="tag">
                                     <p>{{tag}}</p>

@@ -66,6 +66,18 @@ export class DashboardComponent implements OnInit {
       const taskDate = task.deadLine.slice(0, 10);
       return taskDate > today;
     })
+
+    this.sortTasksByDate(this.todaysTasks);
+    this.sortTasksByDate(this.nearbyTasks);
+  }
+
+  sortTasksByDate(tasks: Task[]): void {
+    tasks.sort((taskA, taskB) => {
+      const dateA = new Date(taskA.deadLine);
+      const dateB = new Date(taskB.deadLine);
+
+      return dateA.getTime() - dateB.getTime();
+    });
   }
 
   groupNearbyTasksByDate(): void {

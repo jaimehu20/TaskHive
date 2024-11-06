@@ -62,7 +62,6 @@
     display: flex;
     border-bottom: 2px solid rgb(211, 211, 211);
     padding-bottom: 20px;
-    cursor: pointer;
 }
 
 .task-container img {
@@ -93,12 +92,17 @@
     display: flex;
 }
 
+.taskbox {
+    flex-direction: column;
+}
+
 .task-description {
     display: flex;
     flex-direction: column;
     margin-top: 20px;
     margin-left: 24px;
     flex: 1;
+    cursor: pointer;
 }
 
 .task-description p:nth-child(1) {
@@ -151,4 +155,8 @@
     max-height: 30px;
     font-weight: 400;
     text-align: center;
+}
+
+.nearby-taskName {
+    font-size: 25px !important;
 }
