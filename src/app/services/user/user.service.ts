@@ -12,7 +12,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUserInfo(userID: string): Observable<any> {
+  getUserInfo(userID: string | null): Observable<any> {
     const url = `${this.apiUrl}/${userID}`
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${localStorage.getItem('authTOKEN')}`

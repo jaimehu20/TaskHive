@@ -7,5 +7,6 @@ export interface Task {
     priority: string,
     status: string,
     tags: [],
-    guests: []
+    guests: [],
+    _id: string
 }

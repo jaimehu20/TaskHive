@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Task } from '../../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,27 @@ export class TasksService {
 
   constructor(private http: HttpClient) { }
 
-  addTask(userID: string, task: any) {
+  addTask(userID: string, task: Task) {
     const url = `${this.apiUrl}/${userID}`
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${localStorage.getItem('authTOKEN')}`
     });
     return this.http.post<any>(url, task, { headers })
+  }
+
+  editTask(userID: string | null, taskID: string, task: Task) {
+    const url = `${this.apiUrl}/${userID}/${taskID}`
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('authTOKEN')}`
+    });
+    return this.http.patch<any>(url, task, { headers } )
+  }
+
+  deleteTask(userID: string | null, taskID: string) {
+    const url = `${this.apiUrl}/${userID}/${taskID}`
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('authTOKEN')}`
+    });
+    return this.http.delete<any>(url, { headers })
   }
 }
