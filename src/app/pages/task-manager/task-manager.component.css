@@ -1,0 +1,52 @@
+.today-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.today-bar h2 {
+    font-size: 30px;
+}
+
+.today-bar svg {
+    cursor: pointer;
+}
+
+main {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.task-info {
+    border: 1px solid gray;
+    border-left: none;
+    border-right: none;
+}
+
+.task-info div:nth-child(1) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.task-info span {
+    border-radius: 8px;
+    padding: 5px 10px;
+}
+
+.completed {
+    background: #cdf8d8;
+    color: #5ad07a;
+}
+
+.inprogress {
+    background: #f6dba0;
+    color: #ffa800;
+}
+
+.pending {
+    background-color: #f4bebb;
+    color: #e23428;
+}

@@ -19,7 +19,7 @@
     <div class="main-menu" [ngClass]="{'show' : mainMenuOpened}">
         <ul>
             <li (click)="navigateToDashboard()">Dashboard</li>
-            <li>Manage Tasks</li>
+            <li (click)="navigateTo('/manage-tasks')">Manage Tasks</li>
             <li>Calendar</li>
             <li>Discover</li>
             <li>My profile</li>
