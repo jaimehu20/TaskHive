@@ -2,17 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavBarComponent } from '../../shared/components/nav-bar/nav-bar.component';
 import { UserService } from '../../services/user/user.service';
+import { User } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-preferences',
   standalone: true,
-  imports: [RouterOutlet, NavBarComponent],
+  imports: [NavBarComponent],
   templateUrl: './preferences.component.html',
   styleUrl: './preferences.component.css'
 })
 export class PreferencesComponent implements OnInit {
 
-  userData: any;
+  userData: User | null = null;
 
   constructor (private userService: UserService) {  }
 

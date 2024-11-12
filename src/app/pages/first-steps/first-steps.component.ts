@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PreferencesService } from '../../services/preferences/preferences.service';
+import { Preferences } from '../../interfaces/interfaces';
 
 interface Question {
   question: string,
@@ -32,7 +33,7 @@ export class FirstStepsComponent implements OnInit {
   ]
   currentQuestionIndex: number = 0;
   userID: string | null = null;
-  preferences: any = {};
+  preferences: Preferences | null = null;
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private preferencesService: PreferencesService) { 
     this.form = this.fb.group({
@@ -48,34 +49,36 @@ export class FirstStepsComponent implements OnInit {
 
   onNext() {
     if (this.form.valid) {
-      const currentQuestion = this.questions[this.currentQuestionIndex];
-      const answer = this.form.value.answer;
+      const currentQuestion: Question = this.questions[this.currentQuestionIndex];
+      const answer: string = this.form.value.answer;
 
-      switch (this.currentQuestionIndex) {
-        case 0:
-          this.preferences.reminder = answer === 'Yes';
-          break;
-        case 1:
-          this.preferences.reminderFrequency = answer;
-          break;
-        case 2:
-          this.preferences.dateFormat = answer;
-          break;
-        case 3:
-          this.preferences.timeFormat = answer;
-          break;
-        case 4:
-          this.preferences.weekBegins = answer.toLowerCase();
-          break;
-        case 5:
-          this.preferences.uiMode = answer.toLowerCase();
-          break;
+      if (this.preferences) {
+        switch (this.currentQuestionIndex) {
+          case 0:
+            this.preferences.reminder = answer === 'Yes';
+            break;
+          case 1:
+            this.preferences.reminderFrequency = answer;
+            break;
+          case 2:
+            this.preferences.dateFormat = answer;
+            break;
+          case 3:
+            this.preferences.timeFormat = answer;
+            break;
+          case 4:
+            this.preferences.weekBegins = answer.toLowerCase();
+            break;
+          case 5:
+            this.preferences.uiMode = answer.toLowerCase();
+            break;
+        }
       }
 
       if (this.isLastQuestion()) {
         if (this.userID) {
           this.preferencesService.updatePreferences(this.userID, this.preferences).subscribe({
-            next: (response) => {
+            next: () => {
               this.router.navigate([`/dashboard/${this.userID}`]);
             },
             error: (err) => {

@@ -9,12 +9,13 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
+
 export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  slideToRegister() {
-    const container = document.querySelector('.container');
+  slideToRegister(): void {
+    const container: HTMLElement | null = document.querySelector('.container');
     if (container) {
       container.classList.remove('slide-left');
       container.classList.add('slide-furthest');
@@ -23,7 +24,7 @@ export class LoginComponent {
     }
   }
 
-  login(username: string, password: string, event: Event) {
+  login(username: string, password: string, event: Event): void {
     event.preventDefault();
     
     this.authService.login(username, password).subscribe({

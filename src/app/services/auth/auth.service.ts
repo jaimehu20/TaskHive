@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { LoginScheme } from '../../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,9 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  login(email: string, password: string): Observable<any> {
+  login(email: string, password: string): Observable<LoginScheme> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.post<any>(this.apiUrl, { email, password }, { headers }).pipe(
+    return this.http.post<LoginScheme>(this.apiUrl, { email, password }, { headers }).pipe(
       tap(response => {
         if (response && response.token) {
           localStorage.setItem('authTOKEN', response.token);
@@ -33,13 +34,13 @@ export class AuthService {
     return !!localStorage.getItem('authTOKEN');
   }
 
-  redirectToDashboardIfLoggedIn() {
+  redirectToDashboardIfLoggedIn(): void {
     if (this.isLoggedIn()) {
       this.router.navigate(['/dashboard']);
     }
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('authTOKEN');
     this.router.navigate(['/login']);
   }

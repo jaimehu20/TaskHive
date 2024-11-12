@@ -3,8 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavBarComponent } from '../../shared/components/nav-bar/nav-bar.component';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
-import { Task } from '../../interfaces/interfaces';
-import { EMPTY, interval, Observable, switchMap } from 'rxjs';
+import { Task, User, UserScheme } from '../../interfaces/interfaces';
 import { TasksService } from '../../services/task/tasks.service';
 
 @Component({
@@ -14,10 +13,11 @@ import { TasksService } from '../../services/task/tasks.service';
   templateUrl: './task-manager.component.html',
   styleUrl: './task-manager.component.css'
 })
+
 export class TaskManagerComponent implements OnInit {
 
   userID: string | null = localStorage.getItem('userID');
-  userData: any;
+  userData: User | null = null;
   today = new Date().toISOString().slice(0, 10);
 
   constructor (private router: Router, private userService: UserService, private taskService: TasksService) { }
@@ -29,14 +29,17 @@ export class TaskManagerComponent implements OnInit {
   ngOnInit(): void {
     if (this.userID) {
       this.userService.getUserInfo(this.userID).subscribe({
-        next: (data: any) => {
+        next: (data: UserScheme) => {
           this.userData = data.user;
         },
-        error: (error: any) => {
+        error: (error: Error) => {
           console.error(`Error fetching data:`, error)
         },
         complete: () => {
-          this.sortTasksByDate(this.userData.tasks)
+          if (this.userData && this.userData.tasks) {
+            this.sortTasksByDate(this.userData.tasks);
+            this.checkAndUpdateTaskStatus();
+          }
         }
       })
     }
@@ -48,32 +51,36 @@ export class TaskManagerComponent implements OnInit {
 
   sortTasksByDate(tasks: Task[]): void {
     tasks.sort((taskA, taskB) => {
-      const dateA = new Date(taskA.deadLine);
-      const dateB = new Date(taskB.deadLine);
+      const dateA: Date = new Date(taskA.deadLine);
+      const dateB: Date = new Date(taskB.deadLine);
 
       return dateA.getTime() - dateB.getTime();
     });
   }
 
   checkAndUpdateTaskStatus(): void {
-    const currentDate = new Date(); 
+    const currentDate: Date = new Date(); 
   
-    this.userData.tasks.forEach((task: Task) => {
-
-      const taskStartDate = new Date(`${task.deadLine}T${task.startTime}:00`); 
-      const taskEndDate = new Date(`${task.deadLine}T${task.endTime}:00`); 
+    if (this.userData) {
+      if (this.userData.tasks) {
+        this.userData.tasks.forEach((task: Task) => {
   
-      if (taskStartDate.toDateString() === currentDate.toDateString()) {
-        if (taskStartDate <= currentDate && task.status !== 'In progress') {
-          task.status = 'In progress';
-          this.updateTaskStatus(task);
-        }
+          const taskStartDate: Date = new Date(`${task.deadLine}T${task.startTime}:00`); 
+          const taskEndDate: Date = new Date(`${task.deadLine}T${task.endTime}:00`); 
+      
+          if (taskStartDate.toDateString() === currentDate.toDateString()) {
+            if (taskStartDate <= currentDate && task.status !== 'In progress') {
+              task.status = 'In progress';
+              this.updateTaskStatus(task);
+            }
+          }
+          if (taskEndDate && taskEndDate < currentDate && task.status !== 'Completed') {
+            task.status = 'Completed';
+            this.updateTaskStatus(task);
+          }
+        });
       }
-      if (taskEndDate && taskEndDate < currentDate && task.status !== 'Completed') {
-        task.status = 'Completed';
-        this.updateTaskStatus(task);
-      }
-    });
+    }
   }
   
   
@@ -82,9 +89,9 @@ export class TaskManagerComponent implements OnInit {
 
     this.taskService.editTask(this.userID, task._id, updatedTask).subscribe({
       next: () => {
-        console.log(`Task ${task.taskName} status updated to ${task.status}`);
+        return
       },
-      error: (error) => {
+      error: (error: Error) => {
         console.error('Error updating task status:', error);
       }
     })

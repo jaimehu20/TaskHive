@@ -5,6 +5,7 @@ import { RegisterService } from '../../services/register/register.service';
 import { passwordMatchValidator } from '../../validators/password-match.validator';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
+import { User } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +14,7 @@ import { AuthService } from '../../services/auth/auth.service';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
+
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
@@ -26,7 +28,7 @@ export class RegisterComponent implements OnInit {
     this.initializeForm();
   }
 
-  initializeForm() {
+  initializeForm(): void {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -39,8 +41,8 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  slideToLogin() {
-    const container = document.querySelector('.container');
+  slideToLogin(): void {
+    const container: HTMLElement | null = document.querySelector('.container');
     if (container) {
       container.classList.remove('slide-furthest');
       container.classList.add('slide-left');
@@ -49,13 +51,13 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  register(event: Event) {
+  register(event: Event): void {
     event.preventDefault();
     if (this.registerForm.valid) {
-      const userData = this.registerForm.value;
+      const userData: User = this.registerForm.value;
       this.registerService.register(userData).subscribe({
         next: response => {
-          if(response) {
+          if (response) {
             this.autoLogin(userData.email, userData.password, event)
           }
         },
@@ -69,13 +71,13 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  autoLogin(username: string, password: string, event: Event) {
+  autoLogin(username: string, password: string, event: Event): void {
     event.preventDefault();
     
     this.authService.login(username, password).subscribe({
       next: response => {
           if (response && localStorage.getItem('userID')) {
-            const userId = localStorage.getItem('userID');
+            const userId: string | null = localStorage.getItem('userID');
             if (userId) {
               this.router.navigate([`/first-steps/${userId}`]);
             }

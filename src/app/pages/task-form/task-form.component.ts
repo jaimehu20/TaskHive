@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { TasksService } from '../../services/task/tasks.service';
 import { Router } from '@angular/router';
 import { timeValidator } from '../../validators/time.validators';
+import { Task } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-task-form',
@@ -34,12 +35,12 @@ export class TaskFormComponent {
     }, { validators: timeValidator() });
    }
 
-  setPriority(value: string) {
+  setPriority(value: string): void {
     this.priority = value
     this.taskForm.get('priority')?.setValue(this.priority)
   }
 
-  addTag() {
+  addTag(): void {
     if (this.tagInput && this.tags.length < 3) {
       this.tags.push(this.tagInput);
       this.taskForm.get('tags')?.setValue(this.tags);
@@ -47,19 +48,19 @@ export class TaskFormComponent {
     }
   }
 
-  removeTag(index: number) {
+  removeTag(index: number): void {
     this.tags.splice(index, 1);
     this.taskForm.get('tags')?.setValue(this.tags);
   }
 
-  submit(event: Event) {
+  submit(event: Event): void {
     event.preventDefault();
     if (this.taskForm.valid) {
-      const taskData = this.taskForm.value;
-      const userID = localStorage.getItem('userID');
+      const taskData: Task = this.taskForm.value;
+      const userID: string | null = localStorage.getItem('userID');
       if (userID) {
         this.taskService.addTask(userID, taskData).subscribe({
-          next: response => {
+          next: () => {
             return
           },
           error: err => {

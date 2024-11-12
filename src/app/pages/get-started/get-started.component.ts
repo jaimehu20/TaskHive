@@ -13,8 +13,8 @@ import { RegisterComponent } from '../register/register.component';
 })
 export class GetStartedComponent {
 
-  slideToLogin() {
-    const container = document.querySelector('.container');
+  slideToLogin(): void {
+    const container: HTMLElement | null = document.querySelector('.container');
     if (container) {
       container.classList.remove('slide-furthest');
       container.classList.add('slide-left');
