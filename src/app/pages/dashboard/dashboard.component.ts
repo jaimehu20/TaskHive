@@ -18,12 +18,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 export class DashboardComponent implements OnInit {
 
   userID: string | null = localStorage.getItem('userID');
-  userData: User | null = null;
+  userData: User;
   tasks: Task[] = [];
   todaysTasks: Task[] = [];
-  closestTask: Task | null = null;
+  closestTask: Task | undefined;
   nearbyTasks: Task[] = [];
-  selectedTask: Task | null = null;
+  selectedTask: Task | undefined;
   groupedTasks: { [date: string]: Task[] } = {};
   groupedKeys: string[] = [];
   isModalOpen: boolean = false;
@@ -33,15 +33,16 @@ export class DashboardComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router, private taskService: TasksService, private cdr: ChangeDetectorRef, private fb: FormBuilder) {
     this.taskForm = this.fb.group({
-      taskName: [this.selectedTask?.taskName || ''],
-      taskDescription: [this.selectedTask?.taskDescription || null],
-      deadLine: [this.selectedTask?.deadLine || ''],
-      startTime: [this.selectedTask?.startTime || ''],
-      endTime: [this.selectedTask?.endTime || null],
-      priority: [this.selectedTask?.priority || ''],
-      status: [this.selectedTask?.status || null],
-      tags: [this.selectedTask?.tags || '']
+      taskName: [''],
+      taskDescription: [''],
+      deadLine: [''],
+      startTime: [''],
+      endTime: [''],
+      priority: [''],
+      status: [''],
+      tags: ['']
     });
+    this.userData = this.taskForm.value
    }
 
   ngOnInit(): void {
@@ -101,19 +102,17 @@ export class DashboardComponent implements OnInit {
 
     this.todaysTasks = this.tasks.filter((task: Task) => {
       const taskDate  = task.deadLine.slice(0, 10);
-      return taskDate === today;
+      return taskDate === today && task.status !== 'Completed';
     }); 
 
     this.nearbyTasks = this.tasks.filter((task: Task) => {
       const taskDate = task.deadLine.slice(0, 10);
-      return taskDate > today;
+      return taskDate > today && task.status !== 'Completed';
     })
 
-    if (this.todaysTasks.length > 0) {
-      this.closestTask = this.todaysTasks.sort((a, b) => {
-        return a.startTime.localeCompare(b.startTime);
+    this.closestTask = this.todaysTasks.sort((a, b) => {
+      return a.startTime.localeCompare(b.startTime);
       })[0];
-    }
 
     this.sortTasksByDate(this.todaysTasks);
     this.sortTasksByDate(this.nearbyTasks);
@@ -154,7 +153,7 @@ export class DashboardComponent implements OnInit {
   }
 
   editTask(): void {
-    if (this.taskForm?.valid && this.selectedTask) {
+    if (this.taskForm.valid && this.selectedTask) {
       const updatedTask: Task = { ...this.selectedTask, ...this.taskForm.value };
       this.taskService.editTask(this.userID, this.selectedTask._id, updatedTask).subscribe({
         next: () => {

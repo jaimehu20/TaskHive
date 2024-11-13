@@ -12,7 +12,12 @@ main {
 }
 
 .profile-pic img {
+    border-radius: 3050px;
     width: 250px;
+    height: 250px;
+    object-fit: cover;
+    max-width: 250px;
+    max-height: 250px;
 }
 
 .profile-pic svg {
@@ -22,8 +27,8 @@ main {
     padding: 5px;
     align-self: end;
     position: relative;
-    bottom: 210px;
-    right: 32px;
+    bottom: 236px;
+    right: 25px;
     overflow: visible;
     cursor: pointer;
 }

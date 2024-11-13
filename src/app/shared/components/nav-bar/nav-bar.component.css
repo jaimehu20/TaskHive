@@ -52,9 +52,13 @@ div {
 }
 
 div img {
-  width: 40px;
-  border-radius: 14px;
+  width: 35px;
+  border-radius: 26px;
   cursor: pointer;
+  height: 35px;
+  object-fit: cover;
+  max-width: 35px;
+  max-height: 35px;
 }
 
 div svg {

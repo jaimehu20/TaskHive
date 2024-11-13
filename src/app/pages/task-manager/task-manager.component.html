@@ -11,18 +11,78 @@
         </svg>
     </div>
     <section *ngIf="userData" class="task-list">
-        <div *ngFor="let task of userData.tasks" class="task-info">
+        <div *ngFor="let task of tasks" class="task-info">
             <div>
                 <h1>{{task.taskName}}</h1>
-                <span [ngClass]="getTaskClass(task.status)">{{task.status}}</span>
+                <div class="task-status">
+                    <span [ngClass]="getTaskClass(task.status)">{{task.status}}</span>
+                    <svg (click)="markAsCompleted(task)" *ngIf="task.status !== 'Completed'"
+                        xmlns="http://www.w3.org/2000/svg"  
+                        width="24"  
+                        height="24"  
+                        viewBox="0 0 24 24"  
+                        fill="none"  
+                        stroke="gray"  
+                        stroke-width="2"  
+                        stroke-linecap="round"  
+                        stroke-linejoin="round"  
+                        class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                        <path d="M9 12l2 2l4 -4" />
+                    </svg>
+                </div>
             </div>
             <div>
-                <p>{{task.startTime}} - {{task.endTime}}</p>
-                <p>{{task.deadLine}}</p>
+                <div class="task-date">
+                    <p>{{task.startTime}} - {{task.endTime}}</p>
+                    <p>{{task.deadLine}}</p>
+                </div>
                 <div>
-                    
+                    <svg (click)="openModal(task)"
+                    xmlns="http://www.w3.org/2000/svg"  
+                    width="24"  
+                    height="24"  
+                    viewBox="0 0 24 24"  
+                    fill="none"  
+                    stroke="currentColor"  
+                    stroke-width="2"  
+                    stroke-linecap="round"  
+                    stroke-linejoin="round"  
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M4 7l16 0" /><path d="M10 11l0 6" />
+                    <path d="M14 11l0 6" />
+                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                    </svg>
                 </div>
             </div>
         </div>
     </section>
+    <div *ngIf="isModalOpen" class="modal-overlay">
+        <div class="modal-content">
+            <svg (click)="closeModal()"
+                xmlns="http://www.w3.org/2000/svg"  
+                width="24"  
+                height="24"  
+                viewBox="0 0 24 24"  
+                fill="none"  
+                stroke="currentColor"  
+                stroke-width="2"  
+                stroke-linecap="round"  
+                stroke-linejoin="round"  
+                class="icon icon-tabler icons-tabler-outline icon-tabler-x">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M18 6l-12 12" />
+                <path d="M6 6l12 12" />
+            </svg>
+            <h1>Delete task</h1>
+            <p>Confirm delete: You are about to permanently delete this record. Do you wish to proceed?</p>
+            <div class="button-container" *ngIf="userData && selectedTask">
+                <button class="cancel-button" (click)="closeModal()">No, im not sure</button>
+                <button class="confirm-button" (click)="deleteTask(userData._id, selectedTask._id)">Yes, delete</button>
+            </div>
+        </div>
+    </div>
 </main>

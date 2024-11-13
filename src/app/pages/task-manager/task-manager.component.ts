@@ -18,7 +18,11 @@ export class TaskManagerComponent implements OnInit {
 
   userID: string | null = localStorage.getItem('userID');
   userData: User | null = null;
+  tasks: Task[] | undefined;
+  selectedTask: Task | undefined;
   today = new Date().toISOString().slice(0, 10);
+  isModalOpen: boolean = false;
+  
 
   constructor (private router: Router, private userService: UserService, private taskService: TasksService) { }
 
@@ -31,14 +35,14 @@ export class TaskManagerComponent implements OnInit {
       this.userService.getUserInfo(this.userID).subscribe({
         next: (data: UserScheme) => {
           this.userData = data.user;
+          this.tasks = this.userData.tasks
         },
         error: (error: Error) => {
           console.error(`Error fetching data:`, error)
         },
         complete: () => {
           if (this.userData && this.userData.tasks) {
-            this.sortTasksByDate(this.userData.tasks);
-            this.checkAndUpdateTaskStatus();
+            this.sortTasksByDate(this.userData.tasks)
           }
         }
       })
@@ -46,13 +50,13 @@ export class TaskManagerComponent implements OnInit {
     
     setInterval(() => {
       this.checkAndUpdateTaskStatus(); 
-    }, 60000); 
+    }, 6000); 
   }
 
   sortTasksByDate(tasks: Task[]): void {
     tasks.sort((taskA, taskB) => {
-      const dateA: Date = new Date(taskA.deadLine);
-      const dateB: Date = new Date(taskB.deadLine);
+      const dateA: Date = new Date(`${taskA.deadLine}T${taskA.startTime}:00`);
+      const dateB: Date = new Date(`${taskB.deadLine}T${taskB.startTime}:00`);
 
       return dateA.getTime() - dateB.getTime();
     });
@@ -69,12 +73,11 @@ export class TaskManagerComponent implements OnInit {
           const taskEndDate: Date = new Date(`${task.deadLine}T${task.endTime}:00`); 
       
           if (taskStartDate.toDateString() === currentDate.toDateString()) {
-            if (taskStartDate <= currentDate && task.status !== 'In progress') {
+            if (taskStartDate <= currentDate && task.status !== 'In progress' && task.status !== 'Completed') {
               task.status = 'In progress';
               this.updateTaskStatus(task);
             }
-          }
-          if (taskEndDate && taskEndDate < currentDate && task.status !== 'Completed') {
+          } else if (taskEndDate && taskEndDate < currentDate && task.status !== 'Completed') {
             task.status = 'Completed';
             this.updateTaskStatus(task);
           }
@@ -82,7 +85,6 @@ export class TaskManagerComponent implements OnInit {
       }
     }
   }
-  
   
   updateTaskStatus(task: Task): void {
     const updatedTask: Task = { ...task, status: task.status };
@@ -97,6 +99,14 @@ export class TaskManagerComponent implements OnInit {
     })
   }
 
+  markAsCompleted(task: Task) {
+    if (task.status !== 'Completed') {
+      task.status = 'Completed';
+      this.updateTaskStatus(task)
+    }
+
+  }
+
   getTaskClass(task: string): string {
     if (task === 'Pending') {
       return 'pending'
@@ -105,6 +115,36 @@ export class TaskManagerComponent implements OnInit {
     } else {
       return 'completed'
     }
+  }
+
+  deleteTask(userID: string, taskID: string) {
+    if (userID && taskID) {
+      this.taskService.deleteTask(this.userID, taskID).subscribe({
+        next: () => {
+          this.tasks = this.tasks?.filter(task => task._id !== taskID);
+        },
+        error: (error) => {
+          throw new Error(error)
+        },
+        complete: () => {
+          this.closeModal()
+          return
+        }
+      })
+    }
+  }
+
+  openModal(task: Task) {
+    this.isModalOpen = !this.isModalOpen
+    this.selectTask(task)
+  }
+
+  closeModal() {
+    this.isModalOpen = !this.isModalOpen
+  }
+
+  selectTask(task: Task) {
+    this.selectedTask = task;
   }
 
 }

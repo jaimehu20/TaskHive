@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../../../services/user/user.service';
+import { User } from '../../../interfaces/interfaces';
+import { PreferencesService } from '../../../services/preferences/preferences.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -13,12 +16,20 @@ export class NavBarComponent implements OnInit {
 
   mainMenuOpened: boolean = false;
   profileMenuOpened: boolean = false;
-  userID: string | null = null;
+  userID: string | null = localStorage.getItem('userID');
+  userData: User | null = null;
+  avatarUrl: string | null = null;
 
-  constructor(private router: Router) {  }
+  constructor(private router: Router, private userService : UserService, private preferencesService: PreferencesService) {  }
 
   ngOnInit(): void {
-    this.userID = localStorage.getItem('userID')
+    if (this.userID) {
+      this.userData = this.userService.getInfo();
+    }
+
+    if (this.userData?.profile?.avatar) {
+      this.getProfileImage(this.userData.profile.avatar)
+    }
   }
 
   toggleMainMenu(): void {
@@ -45,6 +56,21 @@ export class NavBarComponent implements OnInit {
   navigateToDashboard(): void {
     this.router.navigate([`/dashboard/${this.userID}`])
     this.toggleMainMenu()
+  }
+
+  getProfileImage(avatarID: string): void {
+    this.preferencesService.getProfileImage(avatarID).subscribe(
+      (imageBlob) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          this.avatarUrl = reader.result as string;
+        };
+        reader.readAsDataURL(imageBlob);
+      },
+      (error) => {
+        console.error('Error fetching image:', error);
+      }
+    );
   }
 
 }

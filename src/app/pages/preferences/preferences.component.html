@@ -1,8 +1,8 @@
 <app-nav-bar />
-<main>
+<main *ngIf="userData">
     <div class="profile-pic">
-        <img src="defaultprofile.webp" />
-        <svg  xmlns="http://www.w3.org/2000/svg"
+        <img [src]="this.avatarUrl || 'defaultprofile.webp'" alt="User Profile" />
+        <svg (click)="triggerFileInput()" xmlns="http://www.w3.org/2000/svg"
               width="24"  
               height="24"  
               viewBox="0 0 24 24"  
@@ -16,6 +16,7 @@
             <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
             <path d="M13.5 6.5l4 4" />
         </svg>
+        <input  #fileInput type="file" (change)="onFileSelected($event)" style="display: none"/>
     </div>
     <h1>{{userData.name}}</h1>
     <h2>{{userData.email}}</h2>
@@ -30,7 +31,7 @@
         <p>Email</p>
         <span>{{userData.email}}</span>
     </div>
-    <div class="preferences-info">
+    <div *ngIf="userData.preferences" class="preferences-info">
         <h3>Preferences</h3>
         <p>Reminders</p>
         <span>{{userData.preferences.reminder ? 'Enabled' : 'Disabled'}}</span>
