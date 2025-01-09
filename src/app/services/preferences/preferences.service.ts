@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 import { Preferences } from '../../interfaces/interfaces';
 
 @Injectable({
@@ -8,8 +8,9 @@ import { Preferences } from '../../interfaces/interfaces';
 })
 export class PreferencesService {
 
-  private apiUrl = 'https://r1cw49ruc7.execute-api.eu-west-3.amazonaws.com/dev'; // 'http://localhost:3000' ;
-
+  private apiUrl = "http://localhost:3000" ; // 'https://wj7xhy77ti.execute-api.eu-west-3.amazonaws.com/dev' 'http://localhost:3000' ;
+  private profileImageSubject = new BehaviorSubject<string | null>(null);
+  profileImage$ = this.profileImageSubject.asObservable();
   constructor(private http: HttpClient) { }
 
   updatePreferences(userID: string, preferences: Preferences | null): Observable<Preferences> {
@@ -21,23 +22,17 @@ export class PreferencesService {
   }
 
   uploadProfileImage(userID: string, file: File): Observable<any> {
-    const url = `${this.apiUrl}/upload-profile-image/${userID}`
+    const url = `${this.apiUrl}/upload-profile-image/${userID}`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('authTOKEN')}`
+    })
     const formData = new FormData();
     formData.append('profileImage', file);
-    
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('authTOKEN')}`
-    });
-    
-    return this.http.post(url, formData, { headers })
+
+    return this.http.post(url, formData, { headers });
   }
 
-  getProfileImage(avatarID: string): Observable<Blob> {
-    const url = `${this.apiUrl}/profile-image/${avatarID}`;
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('authTOKEN')}`
-    });
-
-    return this.http.get(url, { responseType: 'blob', headers })
+  updateProfileImage(newUrl: string):void {
+    this.profileImageSubject.next(newUrl)
   }
 }

@@ -27,8 +27,14 @@ export class NavBarComponent implements OnInit {
       this.userData = this.userService.getInfo();
     }
 
+    this.preferencesService.profileImage$.subscribe(newUrl => {
+      if (newUrl) {
+        this.avatarUrl = newUrl
+      }
+    });
+
     if (this.userData?.profile?.avatar) {
-      this.getProfileImage(this.userData.profile.avatar)
+      this.avatarUrl = this.userData.profile.avatar
     }
   }
 
@@ -57,20 +63,4 @@ export class NavBarComponent implements OnInit {
     this.router.navigate([`/dashboard/${this.userID}`])
     this.toggleMainMenu()
   }
-
-  getProfileImage(avatarID: string): void {
-    this.preferencesService.getProfileImage(avatarID).subscribe(
-      (imageBlob) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          this.avatarUrl = reader.result as string;
-        };
-        reader.readAsDataURL(imageBlob);
-      },
-      (error) => {
-        console.error('Error fetching image:', error);
-      }
-    );
-  }
-
 }
