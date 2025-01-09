@@ -8,7 +8,7 @@ import { Preferences } from '../../interfaces/interfaces';
 })
 export class PreferencesService {
 
-  private apiUrl = "http://localhost:3000" ; // 'https://wj7xhy77ti.execute-api.eu-west-3.amazonaws.com/dev' 'http://localhost:3000' ;
+  private apiUrl = 'https://ydoab7nd1d.execute-api.eu-west-3.amazonaws.com/dev/' ; //  'http://localhost:3000' ;
   private profileImageSubject = new BehaviorSubject<string | null>(null);
   profileImage$ = this.profileImageSubject.asObservable();
   constructor(private http: HttpClient) { }
