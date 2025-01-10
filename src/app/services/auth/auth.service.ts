@@ -10,7 +10,7 @@ import { LoginScheme } from '../../interfaces/interfaces';
 })
 export class AuthService {
 
-  private apiUrl = 'https://ydoab7nd1d.execute-api.eu-west-3.amazonaws.com/dev/login'  // ; 'http://localhost:3000/login';
+  private apiUrl = 'https://cp393i64p7.execute-api.eu-west-3.amazonaws.com/dev/login'  // ; 'http://localhost:3000/login';
 
   constructor(private http: HttpClient, private router: Router) { }
 

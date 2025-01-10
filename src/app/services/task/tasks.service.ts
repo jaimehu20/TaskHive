@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class TasksService {
 
-  private apiUrl = 'https://ydoab7nd1d.execute-api.eu-west-3.amazonaws.com/dev/tasks'; // 'http://localhost:3000/tasks'
+  private apiUrl = 'https://cp393i64p7.execute-api.eu-west-3.amazonaws.com/dev/tasks'; // 'http://localhost:3000/tasks'
 
   constructor(private http: HttpClient) { }
 

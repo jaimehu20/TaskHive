@@ -8,7 +8,7 @@ import { User, UserScheme } from '../../interfaces/interfaces';
 })
 export class RegisterService {
 
-  private apiUrl = 'https://ydoab7nd1d.execute-api.eu-west-3.amazonaws.com/dev/users' ; // 'http://localhost:3000/users'
+  private apiUrl = 'https://cp393i64p7.execute-api.eu-west-3.amazonaws.com/dev/users' ; // 'http://localhost:3000/users'
 
   constructor(private http: HttpClient) { }
 

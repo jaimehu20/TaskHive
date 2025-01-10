@@ -8,7 +8,7 @@ import { Preferences } from '../../interfaces/interfaces';
 })
 export class PreferencesService {
 
-  private apiUrl = 'https://ydoab7nd1d.execute-api.eu-west-3.amazonaws.com/dev/' ; //  'http://localhost:3000' ;
+  private apiUrl = 'https://cp393i64p7.execute-api.eu-west-3.amazonaws.com/dev/' ; //  'http://localhost:3000' ;
   private profileImageSubject = new BehaviorSubject<string | null>(null);
   profileImage$ = this.profileImageSubject.asObservable();
   constructor(private http: HttpClient) { }
@@ -22,7 +22,7 @@ export class PreferencesService {
   }
 
   uploadProfileImage(userID: string, file: File): Observable<any> {
-    const url = `${this.apiUrl}/upload-profile-image/${userID}`;
+    const url = `${this.apiUrl}upload-profile-image/${userID}`;
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${localStorage.getItem('authTOKEN')}`
     })
