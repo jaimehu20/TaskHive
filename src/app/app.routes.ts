@@ -6,6 +6,7 @@ import { FirstStepsComponent } from './pages/first-steps/first-steps.component';
 import { PreferencesComponent } from './pages/preferences/preferences.component';
 import { TaskFormComponent } from './pages/task-form/task-form.component';
 import { TaskManagerComponent } from './pages/task-manager/task-manager.component';
+import { CalendarComponent } from './pages/calendar/calendar.component';
 
 
 export const routes: Routes = [
@@ -15,5 +16,6 @@ export const routes: Routes = [
     { path: 'preferences', component: PreferencesComponent, canActivate: [authGuard] },
     { path: 'task-form', component: TaskFormComponent, canActivate: [authGuard] },
     { path: 'manage-tasks', component: TaskManagerComponent, canActivate: [authGuard] },
+    { path: 'calendar', component: CalendarComponent, canActivate: [authGuard] },
     { path: '', redirectTo: '/get-started', pathMatch: 'full' },
 ];

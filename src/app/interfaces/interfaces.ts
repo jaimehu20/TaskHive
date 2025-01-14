@@ -43,6 +43,10 @@ export interface UserScheme {
     user: User
 }
 
+export interface TaskScheme {
+    task: Task
+}
+
 export interface LoginScheme {
     email: string,
     password: string,

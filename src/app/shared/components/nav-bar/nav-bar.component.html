@@ -20,9 +20,7 @@
         <ul>
             <li (click)="navigateToDashboard()">Dashboard</li>
             <li (click)="navigateTo('/manage-tasks')">Manage Tasks</li>
-            <li>Calendar</li>
-            <li>Discover</li>
-            <li>My profile</li>
+            <li (click)="navigateTo('/calendar')">Calendar</li>
         </ul>
     </div>
     <div class="profile-menu" [ngClass]="{'show': profileMenuOpened}">

@@ -1,0 +1,16 @@
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.calendar-header h2 {
+    font-size: 30px;
+}
+
+.calendar {
+    width: 450px;
+    margin: 0 auto;
+}

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User, UserScheme } from '../../interfaces/interfaces';
+import { TaskScheme, User, UserScheme } from '../../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,15 @@ export class UserService {
 
   getInfo() {
     return this.userInfo
+  }
+
+  getTasksByDate(userID: string | null, date: Date): Observable<TaskScheme> {
+    const url = `${this.apiUrl}/${userID}/tasks?date=${date}`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('authTOKEN')}`
+    });
+
+    return this.http.get<TaskScheme>(url, { headers });
   }
 
 }
