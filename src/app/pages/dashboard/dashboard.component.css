@@ -69,6 +69,7 @@
     height: 30px;
     border-radius: 14px;
     align-self: center;
+    object-fit: cover;
 }
 
 .tasks-per-day h2 {

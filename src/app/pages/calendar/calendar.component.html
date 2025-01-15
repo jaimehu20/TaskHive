@@ -5,5 +5,20 @@
     </div>
 </header>
 <main>
-    <full-calendar [options]="calendarOptions" class="calendar"></full-calendar>
+    <full-calendar [options]="calendarOptions" class="calendar" #calendar></full-calendar>
+    <div class="overlay" *ngIf="showTasks" (click)="closeTaskView()"></div>
+    <div class="task-modal" *ngIf="showTasks">
+        <h2>{{ selectedDate | date: 'longDate' }} tasks</h2>
+        <ul *ngIf="tasksForSelectedDate.length; else noTasks">
+          <li *ngFor="let task of tasksForSelectedDate">
+            <strong>{{ task.taskName }}</strong>: {{ task.taskDescription }} 
+          </li>
+        </ul>
+        <ng-template #noTasks>
+          <p>No tasks for this day.</p>
+        </ng-template>
+        <div class="modal-button">
+            <button (click)="closeTaskView()">Close</button>
+        </div>
+    </div>
 </main>
