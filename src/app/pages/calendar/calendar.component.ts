@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { NavBarComponent } from '../../shared/components/nav-bar/nav-bar.component';
 import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core';
@@ -15,7 +15,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [NavBarComponent, FullCalendarModule, CommonModule],
   templateUrl: './calendar.component.html',
-  styleUrl: './calendar.component.css'
+  styleUrl: './calendar.component.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class CalendarComponent {
 

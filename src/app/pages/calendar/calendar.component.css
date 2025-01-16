@@ -11,9 +11,10 @@
 }
 
 .calendar {
-    width: 450px;
     height: 728px;
+    width: 96%;
     margin: 0 auto;
+    margin-bottom: 30px;
 }
 
 .task-modal {
@@ -26,7 +27,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 20px;
     z-index: 1000;
-    width: 400px;
+    width: 80%;
     border-radius: 8px;
 }
   
@@ -74,4 +75,8 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
+}
+
+.fc .fc-toolbar  {
+    flex-direction: column;
 }
