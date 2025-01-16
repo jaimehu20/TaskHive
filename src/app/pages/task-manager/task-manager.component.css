@@ -98,6 +98,7 @@ main {
     position: relative;
     display: flex;
     flex-direction: column;
+    max-width: 538px;
 }
 
 .modal-content svg {
@@ -132,4 +133,9 @@ main {
 .cancel-button {
     background: #f4bebb;
     color: #e23428;
+}
+
+.delete-modal {
+    margin-top: 0;
+    margin-bottom: 0;
 }

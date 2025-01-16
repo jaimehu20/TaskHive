@@ -63,4 +63,12 @@ export class NavBarComponent implements OnInit {
     this.router.navigate([`/dashboard/${this.userID}`])
     this.toggleMainMenu()
   }
+
+  redirectToGithub() {
+    window.open('https://github.com/jaimehu20', '_blank');
+  }
+
+  redirectToLinkedin() {
+    window.open('https://www.linkedin.com/in/jaime-hurtado-ure%C3%B1a-b70789296/', '_blank');
+  }
 }
