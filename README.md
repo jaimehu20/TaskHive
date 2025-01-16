@@ -5,4 +5,4 @@
 ![633shots_so](https://github.com/user-attachments/assets/99b73ea8-cd61-43a1-addc-50604120e749)
 
 Las tecnologías utilizadas son:
-(https://img.shields.io/badge/-Angular-DD0031?style=flat-square&logo=angular&logoColor=white)
+[(https://img.shields.io/badge/-Angular-DD0031?style=flat-square&logo=angular&logoColor=white)](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
