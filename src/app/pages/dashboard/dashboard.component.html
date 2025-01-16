@@ -12,7 +12,6 @@
             </svg>
         </div>
         <div *ngIf="closestTask" class="closest-task">
-            <img src="prueba.jpg"/>
             <div>
                 <p>{{closestTask.taskName}}</p>
                 <p>{{closestTask.startTime}}</p>
@@ -105,12 +104,7 @@
                         <label for="endTime">End time</label>
                         <input formControlName="endTime" type="time" [readonly]="!editMode" class="time-inputs"/>
                     </div>            
-                </div>
-               <!--
-                <div *ngIf="taskForm.errors?.['timeError'] && taskForm.touched" class="error-message">
-                    Start time must be earlier than the end time.
-                </div>
-               -->  
+                </div> 
                 <label for="priority">Priority</label>
                 <select id="priority" formControlName="priority" [disabled]="!editMode">
                     <option>low</option>
@@ -121,34 +115,6 @@
                 <div class="tag-list">
                     <span class="tag" *ngFor="let tag of selectedTask?.tags; let i = index">{{ tag }}</span>
                 </div>
-                <!--
-                <div class="tags-container">
-                    <div class="tag-input">
-                        <input type="text" [(ngModel)]="tagInput" [ngModelOptions]="{standalone: true}" placeholder="Enter your tags... (max 3 tags)" (keyup.enter)="addTag()"/>
-                        <svg (click)="addTag()"
-                            xmlns="http://www.w3.org/2000/svg"  
-                            width="24"  
-                            height="24"  
-                            viewBox="0 0 24 24"  
-                            fill="none"  
-                            stroke="#ADA1A0"  
-                            stroke-width="2"  
-                            stroke-linecap="round"  
-                            stroke-linejoin="round"  
-                            class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" />
-                            <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                            <path d="M14 4l0 4l-6 0l0 -4" />
-                        </svg>
-                    </div>
-                    
-                    <div class="error-message">
-                        <span *ngIf="tags.length === 3">You have reached the maximum number of tags</span>
-                    </div>
-                </div>
-                <button type="submit" [disabled]="taskForm.invalid" class="send-button">Add task</button>
-                -->
                 <button class="edit-button" *ngIf="editMode" type="submit">Confirm</button>
             </form>
             <div class="actions">
