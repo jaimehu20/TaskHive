@@ -253,6 +253,10 @@
     margin-bottom: 50px;
 }
 
+.time-inputs {
+    width: 130px !important;
+}
+
 .modal-form select {
     margin-bottom: 30px;
     max-width: 300px;
