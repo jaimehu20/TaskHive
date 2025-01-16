@@ -5,6 +5,7 @@
 ![633shots_so](https://github.com/user-attachments/assets/99b73ea8-cd61-43a1-addc-50604120e749)
 
 Las tecnologías utilizadas son:
+
 [![Angular](https://img.shields.io/badge/Angular-%23DD0031.svg?logo=angular&logoColor=white)](#) ![Typescript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?logo=css3&logoColor=white)
 
 ⚡ FUNCIONALIDADES ⚡
